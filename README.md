@@ -1,3 +1,4 @@
 # Tài liệu cho project mht-zigbee
 
-## 1. [Định nghĩa topic cho publish/sunscribe](pubsub.md)
+## 1. [Hướng dẫn sử dụng deploy key](github.md)
+## 2. [Định nghĩa topic cho publish/sunscribe](pubsub.md)
