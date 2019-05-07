@@ -1,6 +1,7 @@
 # NPM
 
-Cơ bản sử dụng npm + ES6 để deploy js module
+* Cơ bản sử dụng npm + ES6 để deploy js module
+* Áp dụng cho linux, OSX, WSL cho windows
 
 # Mục đích
 
@@ -37,7 +38,7 @@ Cơ bản sử dụng npm + ES6 để deploy js module
           "url": "https://github.com/vinhlq/mht-iot-client-js"
         },
         "author": {
-            "name": "vinhlq",
+            "name": "Vinh",
             "email": "vinhlq@hotmail.com",
             "url": "https://mht.vn"
         },
@@ -70,7 +71,10 @@ Cơ bản sử dụng npm + ES6 để deploy js module
       * devDependencies
         * Module sử dụng trong giai đoan develop (build ES6 script)
 
+# Login
+  * Lần đầu chạy cần login vào tài khoản npm:
+    > npm login
 # Publish
 
-> npm publish
+  > npm publish
     
