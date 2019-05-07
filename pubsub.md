@@ -17,7 +17,6 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
   > [Tài liệu Markdown](https://guides.github.com/features/mastering-markdown)
 
 # Format
-        > ${prefix}/{object}/post
   * mqtt + iot-core
       * get
         > ${prefix}/{object}/get
