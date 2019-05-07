@@ -15,10 +15,10 @@
 
       ```
       .
-      |-- dist
+      |-- dist/
       |   |-- lib/
       |   `-- index.js
-      |-- src
+      |-- src/
       |   |-- lib/
       |   `-- index.js
       |-- babel.config.js
