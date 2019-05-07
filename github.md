@@ -9,7 +9,7 @@ Tài liệu hướng dẫn sử dụng github deploy key
   1. Tạo ssh key (linux, osx, hoặc WSL cho windows)
 
       Lưu ý đăt tên cho file khi được hỏi "Enter file in which to save the key"
-      
+
       > ssh-keygen -t rsa -b 4096 -C "username@email"
 
       Kết quả được 1 private key và 1 public key .pub
@@ -17,7 +17,7 @@ Tài liệu hướng dẫn sử dụng github deploy key
   2. Đăng ki ssh key với github
       > github.com > settings > Deploy key > Add deploy key
 
-      Mở file chứa private key = text editor copy vào khung, check option "Allow write access" > add key
+      Mở file chứa public key = text editor copy vào khung, check option "Allow write access" > add key
 
   3. Push bằng ssh key
 
