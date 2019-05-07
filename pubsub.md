@@ -39,7 +39,7 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 # Object:
 
   ### Device:
-  1. GET /info
+  1. GET /device/info
       * payload
         * rest
           > None
@@ -69,7 +69,7 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
             }
           ]
           ```
-  2. GET /state
+  2. GET /device/state
 
       * payload
         * rest
@@ -91,7 +91,7 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
         ]
         ```
 
-  3. POST /command
+  3. POST /device/command
       * payload
         ```JSON
         {
