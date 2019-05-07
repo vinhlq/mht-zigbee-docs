@@ -2,7 +2,7 @@
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
-Tài liệu mô tả format public/subscribe cho các giao thức:
+Tài liệu mô tả format publish/subscribe cho các giao thức:
 
   * rest
   * mqtt
