@@ -35,8 +35,6 @@ Khi project ở trạng thái private thì cách tốt nhất để  push là s�
       > #!/bin/sh\
       chmod 400 private.pem\
       GIT_SSH_COMMAND='ssh -i ssh.rsa.pem' git $@
-
-  4. Chia sẻ ssh key khi share project
     
 ## Pull request
 
