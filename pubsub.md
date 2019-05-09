@@ -161,7 +161,7 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
           "description": "string"
         }
         ```
-  # Rules
+  ### Rules
   1. GET /rules
       * request payload
         * rest
