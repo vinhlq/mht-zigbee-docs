@@ -16,71 +16,120 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 
   > [Tài liệu Markdown](https://guides.github.com/features/mastering-markdown)
 
-# Format
+# Topic format
   * mqtt + iot-core
-      * get
-        > ${prefix}/{object}/get
-      * post
-        > ${prefix}/{object}/post
-      * delete
-        > ${prefix}/{object}/del
+      > ${prefix}/${object}/${method}
   * rest
       > ${prefix}/{object}
+
+  * socket.io
+      > {object}
   
-# Prefix
+# Topic prefix
 
   * iot-core
-    > arn:aws:iot:${AWS_REGION}:${accountArn}:topic/${provider}/${deviceUid}
+    > arn:aws:iot:${AWS_REGION}:${accountArn}:topic/${provider}/${GatewayUid}
   * mqtt
-    > ${provider}/${deviceUid}
+    > ${provider}/${GatewayUid}
   * rest
     > ${host}/rest
+
+  * socket.io
+    > None
+# Topic method
+
+  * mqtt + iot-core
+    > GET
+
+    > POST
+
+    > DEL
+
+  * rest + socket.io
+    > None
+
+# Topic response requestID
+
+  * mqtt + iot-core
+    > Định nghĩa trong payload của request
+  
+  * rest + socket.io
+    > None
+
+# Request
+  * topic
+    * mqtt + iot-core
+      > ${prefix}/${object}/${method}
+    * rest + socket.io
+      > ${prefix}/${object}
+  * payload
+    * mqtt + iot-core
+      ```JSON
+      {
+        "requestID": "string",
+        ...
+      }
+      ```
+# Response
+  * topic
+    * mqtt + iot-core
+      > ${prefix}/${object}/${requestID}/response
+    * rest + socket.io
+      > ${prefix}/${object}
+  * payload
+    ```JSON
+    {
+      ...
+    }
+    ```
 
 # Object:
 
   ### Device:
   1. GET /device/info
-      * payload
+      * request payload
         * rest
           > None
-        * mqtt + iot-core
+        * mqtt + iot-core + socket.io
           ```JSON
           {
+            "requestID": "string",
             "UID": ["uid1", "uid2", "uid3"]
           }
           ```
-      * response
-          ```JSON
-          [
-            {
-              "type": "switch",
-              "configuration": {},
-              "properties": {},
-              "UID": "string",
-              "statusInfo": {
-                "status": "UNINITIALIZED",
-                "statusDetail": "NONE",
-                "description": "string"
-              },
-              "firmwareStatus": {
-                "status": "string",
-                "updatableVersion": "string"
-              }
+      * response payload
+        ```JSON
+        [
+          {
+            "type": "switch",
+            "configuration": {},
+            "properties": {},
+            "UID": "string",
+            "statusInfo": {
+              "status": "UNINITIALIZED",
+              "statusDetail": "NONE",
+              "description": "string"
+            },
+            "firmwareStatus": {
+              "status": "string",
+              "updatableVersion": "string"
             }
-          ]
-          ```
+          }
+        ]
+        ```
   2. GET /device/state
-
-      * payload
+    
+      * request payload
         * rest
           > None
-        * mqtt + iot-core
+        * mqtt + iot-core + socket.io
           ```JSON
           {
+            "requestID": "string",
             "UID": ["uid1", "uid2", "uid3"]
           }
           ```
-      * response
+      * response payload
         ```JSON
         [
           {
@@ -92,14 +141,16 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
         ```
 
   3. POST /device/command
-      * payload
+
+      * request payload
         ```JSON
         {
+          "requestID": "string",
           "UID": "string",
           "value": "string"
         }
         ```
-      * response
+      * response payload
         ```JSON
         {
           "UID": "string",
@@ -109,26 +160,31 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
         ```
   # Rules
   1. GET /rules
-      * payload
+      * request payload
         * rest
           > None
         * mqtt + iot-core
-          > Any
-      * response
-        ```JSONA
+          ```JSON
+          {
+            "requestID": "string"
+          }
+          ```
+      * response payload
+        ```JSON
         {
           "rules": {},
         }
         ```
 
   2. POST /rules
-      * payload
+      * request payload
         ```JSON
         {
+          "requestID": "string",
           "rules": {}
         }
         ```
-      * response
+      * response payload
         ```JSON
         {
           "code": "number",
