@@ -38,3 +38,36 @@ Tài liệu hướng dẫn sử dụng github deploy key
 
   4. Chia sẻ ssh key khi share project
     
+## Pull request
+
+  * NGười nằm trong nhóm collaborator có thể push trực tiếp, lưu ý là cần push đến 1 branch khác master và tạo pull request trên github.com
+
+  * Với trường họp không người dùng không nằm trong nhóm collaborator
+
+    1. Tạo deploy key
+
+    2. Gửi public key cho chủ sở hữu repository
+
+    3. Chủ sở hữu thêm public key vào deploy key
+
+    4. Tạo pull request
+
+        * clone project
+
+          > GIT_SSH_COMMAND='ssh -i private.pem' git clone <git_url>
+
+        * push đến 1 branch khác master
+
+          > GIT_SSH_COMMAND='ssh -i private.pem' git push origin <branch_name>
+
+        * Tạo pull request:
+
+          Sử dụng url
+
+          > https://github.com/vinhlq/<repo_name>/pull/new/<branch_name>
+
+          VD:
+
+          > https://github.com/vinhlq/mht-zigbee-gateway-js/pull/new/mht.vn
+
+        * Chủ sở hữu merge request vào master
