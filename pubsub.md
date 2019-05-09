@@ -18,7 +18,10 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 
 # Topic format
   * mqtt + iot-core
+    * request
       > ${prefix}/${object}/${method}
+    * response
+      > ${prefix}/${object}/response/${requestID}
   * rest
       > ${prefix}/{object}
 
@@ -73,7 +76,7 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 # Response
   * topic
     * mqtt + iot-core
-      > ${prefix}/${object}/${requestID}/response
+      > ${prefix}/${object}/response/${requestID}
     * rest + socket.io
       > ${prefix}/${object}
   * payload
