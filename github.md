@@ -4,7 +4,7 @@ Tài liệu hướng dẫn sử dụng github deploy key
 
 # Deploy key
 
-> Khi project ở trạng thái private thì cách tốt nhất để  push là sử dụng ssh key
+Khi project ở trạng thái private thì cách tốt nhất để  push là sử dụng ssh key
 
   1. Tạo ssh key (linux, osx, hoặc WSL cho windows)
 
@@ -40,7 +40,7 @@ Tài liệu hướng dẫn sử dụng github deploy key
     
 ## Pull request
 
-  * NGười nằm trong nhóm collaborator có thể push trực tiếp, lưu ý là cần push đến 1 branch khác master và tạo pull request trên github.com
+  * Người nằm trong nhóm collaborator có thể push trực tiếp, lưu ý là cần push đến 1 branch khác master và tạo pull request trên github.com
 
   * Với trường họp không người dùng không nằm trong nhóm collaborator
 
