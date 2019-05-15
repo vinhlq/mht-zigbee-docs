@@ -4,7 +4,7 @@
 
 Tài liệu mô tả format publish/subscribe cho các giao thức:
 
-  * rest
+  * socket.io
   * mqtt
   * iot-core
   > Mọi người cần chỉnh sửa thì fork project > modify > pull request
@@ -18,11 +18,6 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 
 # Topic format
   * mqtt + iot-core
-    * request
-      > ${prefix}/${object}/${method}
-    * response
-      > ${prefix}/${object}/response/${requestID}
-  * rest
       > ${prefix}/{object}
 
   * socket.io
@@ -39,158 +34,175 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 
   * socket.io
     > None
-# Topic method
 
+# payload
   * mqtt + iot-core
-    > GET
-
-    > POST
-
-    > DEL
-
-  * rest + socket.io
-    > None
-
-# Topic response requestID
-
-  * mqtt + iot-core
-    > Định nghĩa trong payload của request
-  
-  * rest + socket.io
-    > None
-
-# Request
-  * topic
-    * mqtt + iot-core
-      > ${prefix}/${object}/${method}
-    * rest + socket.io
-      > ${prefix}/${object}
-  * payload
-    * mqtt + iot-core
-      ```JSON
-      {
-        "requestID": "string",
-        ...
-      }
-      ```
-# Response
-  * topic
-    * mqtt + iot-core
-      > ${prefix}/${object}/response/${requestID}
-    * rest + socket.io
-      > ${prefix}/${object}
-  * payload
-    ```JSON
-    {
-      ...
-    }
+    > JSON
+  * socket.io
+    > Object
+  * parse
+    ```javascript
+      if(typeof payload === 'string')
+        payload = JSON.parse(payload)
     ```
 
-# Object:
+# Object: gateway event
 
-  ### Device:
-  1. GET /device/info
-      * request payload
-        * rest
-          > None
-        * mqtt + iot-core + socket.io
-          ```JSON
-          {
-            "requestID": "string",
-            "UID": ["uid1", "uid2", "uid3"]
-          }
-          ```
-      * response payload
-        ```JSON
-        [
-          {
-            "type": "switch",
-            "configuration": {},
-            "properties": {},
-            "UID": "string",
-            "statusInfo": {
-              "status": "UNINITIALIZED",
-              "statusDetail": "NONE",
-              "description": "string"
-            },
-            "firmwareStatus": {
-              "status": "string",
-              "updatableVersion": "string"
-            }
-          }
+  1. Event /devices
+      * payload
+
+      ```JSON
+      {
+        "devices": [
+          {"nodeId":"0x8307","deviceState":16,"deviceType":"0x0103","timeSinceLastMessage":47,"deviceEndpoint":{"eui64":"0x000B57FFFE4F4F12","endpoint":2,"clusterInfo":[{"clusterId":"0x0000","clusterType":"In"},{"clusterId":"0x0003","clusterType":"In"},{"clusterId":"0x0003","clusterType":"Out"},{"clusterId":"0x0006","clusterType":"Out"}]},"hash":"0x000B57FFFE4F4F12-2","gatewayEui":"000B57FFFE51B5A5","sleepyDevice":false,"otaUpdating":false,"otaTotalBytesSent":0,"otaUpdatePercent":0,"otaTargetImageSizeKB":0,"otaTargetFirmwareVersion":0,"supportsRelay":true,"supportedCluster":[{"clusterId":"0x0006","clusterType":"In"}]}
         ]
-        ```
-  2. GET /device/state
-    
-      * request payload
-        * rest
-          > None
-        * mqtt + iot-core + socket.io
-          ```JSON
-          {
-            "requestID": "string",
-            "UID": ["uid1", "uid2", "uid3"]
-          }
-          ```
-      * response payload
-        ```JSON
-        [
-          {
-            "UID": "string",
-            "type": "dimmer",
-            "value": "100"
-          }
-        ]
-        ```
+      }
+      ```
 
-  3. POST /device/command
+  2. Event /heartbeat
 
-      * request payload
+      ```JSON
+      {
+        "networkUp":true,"networkPanId":"0x43DC","radioTxPower":20,"radioChannel":14,"gatewayEui":"000B57FFFE51B5A5"
+      }
+      ```
+  3. Event /relays
+
+      ```JSON
+      {}
+      ```
+
+  4. Event /gatewaysettings
+
+      ```JSON
+      {
+        "ncpStackVersion":"6.5.0-188","networkUp":true,"networkPanId":"0x43DC","radioTxPower":20,"radioChannel":14
+      }
+      ```
+
+  3. Event /serversettings
+
+      ```JSON
+      {
+        "ip":"10.42.0.1","otaInProgress":false,"customerTesting":false,"logStreaming":false,"cliTerminal":false,"testNumber":1
+      }
+      ```
+
+# Object: gateway command
+  
+  1. Device control
+
+      * lighton/lightoff/lighttoggle
+      
         ```JSON
         {
-          "requestID": "string",
-          "UID": "string",
-          "value": "string"
+          "type":"lighton", "deviceTableIndex": {}}
         }
         ```
-      * response payload
         ```JSON
         {
-          "UID": "string",
-          "code": "number",
-          "description": "string"
-        }
-        ```
-  ### Rules
-  1. GET /rules
-      * request payload
-        * rest
-          > None
-        * mqtt + iot-core
-          ```JSON
-          {
-            "requestID": "string"
-          }
-          ```
-      * response payload
-        ```JSON
-        {
-          "rules": {},
+          "type":"lighton", "deviceEndpoint": {}}
         }
         ```
 
-  2. POST /rules
-      * request payload
+      * setlightlevel
+      
         ```JSON
         {
-          "requestID": "string",
-          "rules": {}
+          "type":"setlightlevel", "deviceTableIndex": {}}
         }
         ```
-      * response payload
         ```JSON
         {
-          "code": "number",
-          "description": "string"
+          "type":"setlightlevel", "deviceEndpoint": {}}
+        }
+        ```
+      
+      * setlightcolortemp
+      
+        ```JSON
+        {
+          "type":"setlightcolortemp", "deviceTableIndex": {}}
+        }
+        ```
+        ```JSON
+        {
+          "type":"setlightcolortemp", "deviceEndpoint": {}}
+        }
+        ```
+
+  2. Device add
+
+      * permitjoinZB3OpenNetworkOnly
+      
+        ```JSON
+        {
+          "type":"permitjoinZB3OpenNetworkOnly", "delayMs": "number"
+        }
+        ```
+  3. Relay/Rule
+
+      * addrelay/deleterelay
+      
+        ```JSON
+        {
+          "type":"addrelay", "inDeviceInfo": {}, "outDeviceInfo": {}
+        }
+        ```
+
+      * addcloudrule/deletecloudrule
+      
+        ```JSON
+        {
+          "type":"addcloudrule", "inDeviceInfo": {}, "outDeviceInfo": {}
+        }
+        ```
+
+      * clearrelays
+      
+        ```JSON
+        {
+          "type":"clearrelays"
+        }
+        ```
+
+      * clearcloudrules
+      
+        ```JSON
+        {
+          "type":"clearcloudrules"
+        }
+        ```
+
+      * servermessage: addgroup
+      
+        ```JSON
+        {
+          "type":"addgroup", "group": {"devices": ["group1", "group2"]}
+        }
+        ```
+
+      * servermessage: removegroup
+      
+        ```JSON
+        {
+          "type":"removegroup", "groupName": "group1"
+        }
+        ```
+  4. Gateway
+
+      * requestgatewaystate
+      
+        ```JSON
+        {
+          "type": "requestgatewaystate"
+        }
+        ```
+
+      * loadgatewaylog
+      
+        ```JSON
+        {
+          "type": "loadgatewaylog"
         }
         ```
