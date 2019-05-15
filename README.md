@@ -8,4 +8,4 @@
 ## 2. [Hướng dẫn sử dụng deploy key](github.md)
 ## 3. [Cơ bản sử dụng npm](npm.md)
 ## 4. [Định nghĩa topic cho publish/subscribe](pubsub.md)
-## 5. [Quy trình tạo aws-iot certificates](aws-iot-cert.md)
+## 5. [Quy trình đăng kí aws-iot certificates](aws-iot-cert.md)
