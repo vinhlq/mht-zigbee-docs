@@ -67,8 +67,8 @@
   
 ## Phía device: mht-zigbee-gateway
 
-1. Giữ nguyên kênh **aws-iot-command** (user >> device) 
-2. Giữ nguyên kênh **aws-iot-event** (device >> user) cho 1 số event:
+1. Giữ nguyên kênh **aws-iot-device-command** (user >> device) 
+2. Giữ nguyên kênh **aws-iot-device-event** (device >> user) cho 1 số event:
     * devices:
       * Do số nested level của event này > 6 (amz maximum nested level) và cũng chỉ phát sinh khi có command từ user
       * Có thể vẫn giữ lại event này bên kênh **aws-iot-thing-shadow** và loại bỏ các level > 6
