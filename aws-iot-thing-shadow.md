@@ -16,7 +16,7 @@
 ## Phía cloud aws-iot
 1. Tạo aws-iot-thing
 
-    * Tên của **thing** chính là **key** dể thiết bị đăng kí với amz do đó cần duy nhất và có format chuẩn thiết bị luôn xác định được mình gắn với **thing** nào
+    * Tên của **thing** chính là **key** dể thiết bị đăng kí với amz do đó cần duy nhất và có format chuẩn để thiết bị luôn xác định được mình gắn với **thing** nào
     * Name format:
       > ${provider}-${thingType}-{deviceUid}
 
@@ -67,7 +67,7 @@
   
 ## Phía device: mht-zigbee-gateway
 
-1. Giữ nguyên kênh **aws-iot-command** (user >> device) trên 
+1. Giữ nguyên kênh **aws-iot-command** (user >> device) 
 2. Giữ nguyên kênh **aws-iot-event** (device >> user) cho 1 số event:
     * devices:
       * Do số nested level của event này > 6 (amz maximum nested level) và cũng chỉ phát sinh khi có command từ user
