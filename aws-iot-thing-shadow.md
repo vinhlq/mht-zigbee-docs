@@ -30,6 +30,8 @@
       > iot:Receive
     * Topic
       > aws/things/${thingName}/shadow/update
+
+      > $aws/things/${thingName}/shadow/get
 ## Phía user app + web
 1. Topic:
 
@@ -64,6 +66,12 @@
           * desired: toàn bộ state hiện tại
           * delta: khác biệt giữa hiện tại và khởi tạo **(reported)**
       * event 
+    * Topic publish
+
+        * Get
+          > $aws/things/${thingName}/shadow/get
+
+          Publish 1 empty message để trigger aws-iot update shadow
   
 ## Phía device: mht-zigbee-gateway
 
