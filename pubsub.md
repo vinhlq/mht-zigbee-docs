@@ -37,13 +37,15 @@ Tài liệu mô tả format publish/subscribe cho các giao thức:
 
 # payload
   * mqtt + iot-core
-    > JSON
+    > JSON || Buffer
   * socket.io
     > Object
   * parse
     ```javascript
-      if(typeof payload === 'string')
+      if( data instanceof Buffer ||
+          typeof data === 'string') {
         payload = JSON.parse(payload)
+      }
     ```
 
 # Object: gateway event
