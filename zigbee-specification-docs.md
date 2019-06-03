@@ -42,10 +42,10 @@
         * Là kết nối ảo(virtual wire) giữa client <> server giữa 2 endpoint
     * Client/Server Model ([Mục 2.2.2](zigbee/07-5123-06-zigbee-cluster-library-specification.pdf)):
         
-        * Server là thực thể lưu trữ các attribute
-        * Client là thực thể  set/get các attribute
-        * Command cho phép client set/get các attribute
-        * Report command cho phép server report các thay đổi của attribute tới **bound client** 
+        * **Server** là thực thể lưu trữ các attribute
+        * **Client** là thực thể  set/get các attribute
+        * **Command** cho phép client set/get các attribute
+        * **Report command** cho phép server report các thay đổi của attribute tới **bound client** 
 
 5. Các cluster phổ biến:
 
