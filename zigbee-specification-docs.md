@@ -4,7 +4,7 @@
 
 1. Zigbee node
 
-    * Là các thực thể (device) chia thành 2 loại:
+    * Là các thiết bị zigbee(ZD) chia thành 2 loại:
 
         * Coordinator/Router(ZC/ZR): Node làm nhiệm vụ khởi tạo mạng và chuyển tiếp gói tin trong mạng
 
@@ -17,7 +17,7 @@
 
 3. [Profiles](https://www.eetimes.com/document.asp?doc_id=1278223)
 
-    * Quy định kiểu loại endpoint (devicetype): Tương ứng với việc định nghĩa model của các cluster (client hoặc server hoặc cả 2) được build thành tiêu chuẩn (zigbee standard). **Định nghĩa này cho phép các thiết bị của các nhà cung cấp khác nhau có thể tương thích với nhau** (thông qua binding)
+    * Quy định kiểu loại endpoint (devicetype): Tương ứng với việc định nghĩa cluster và model của các cluster (client hoặc server hoặc cả 2) được build thành tiêu chuẩn (zigbee standard). **Định nghĩa này cho phép các thiết bị của các nhà cung cấp khác nhau có thể tương thích với nhau** (thông qua binding)
 
         * [Smart Energy Profile(SE)](zigbee/docs-07-5356-19-0zse-zigbee-smart-energy-profile-specification.pdf)
 
@@ -27,24 +27,24 @@
 
         * [ZigBee Light Link(LL)](zigbee/13001r00ZB_MWG-ZigBee_Light_Link_Standard.pdf)
 
-    * Nhà cung cấp thiết bị có thể không tuân theo các chuẩn có sẵn mà có thể xây dựng các định nghĩa cluster của riêng mình
+    * Nhà cung cấp thiết bị có thể định nghĩa custom endpoint không tuân theo các chuẩn có sẵn mà có thể xây dựng các định nghĩa cluster của riêng mình
 
 4. [Cluster Specification](zigbee/07-5123-06-zigbee-cluster-library-specification.pdf)
     
     * Cluster:
     
-        * Định nghĩa các nhóm chức năng
+        * Định nghĩa các nhóm chức năng, **tuân theo model client/server** có thể đóng vai trò client hoặc server hoặc cả 2
     * Attribute:
 
-        * Thuộc tính được định nghĩa bởi cluster có thể đọc(readonly) hoặc ghi(readwrite)
+        * Thuộc tính được định nghĩa bởi cluster có thể đọc(readonly) hoặc ghi(readwrite). **Server chịu trách nhiệm lưu trữ** (store) các attribute
     * Cluster binding:
 
         * Là kết nối ảo(virtual wire) giữa client <> server giữa 2 endpoint
-    * Client/Server Model (Mục 2.2.2):
+    * Client/Server Model ([Mục 2.2.2](zigbee/07-5123-06-zigbee-cluster-library-specification.pdf)):
         
         * Server là thực thể lưu trữ các attribute
         * Client là thực thể  set/get các attribute
-        * Command cho phép client điều chỉnh các attribute
+        * Command cho phép client set/get các attribute
         * Report command cho phép server report các thay đổi của attribute tới **bound client** 
 
 5. Các cluster phổ biến:
