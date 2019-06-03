@@ -9,4 +9,5 @@
 ## 3. [Cơ bản sử dụng npm](npm.md)
 ## 4. [Định nghĩa topic cho publish/subscribe](pubsub.md)
 ## 5. [Quy trình đăng kí aws-iot certificates](aws-iot-cert.md)
-## 5. [Implement aws-iot-thing-shadow](aws-iot-thing-shadow.md)
+## 6. [Implement aws-iot-thing-shadow](aws-iot-thing-shadow.md)
+## 7. [Zigbee Specification](zigbee-specification-docs.md)
